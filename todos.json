@@ -1,0 +1,47 @@
+[
+  {
+    "id": "demo-3",
+    "text": "Inventory Management Table",
+    "description": "| Item Name | Quantity | Status |\n| :--- | :---: | ---: |\n| MacBook Pro | 5 | In Stock |\n| Dell Monitor | 0 | Out of Stock |\n| Keyboards | 12 | In Stock |\n\n*Note: Tables are great for structured data.*",
+    "labels": [
+      "Inventory",
+      "Office"
+    ],
+    "completed": false,
+    "createdAt": "2026-04-10T22:07:10.000Z"
+  },
+  {
+    "id": "demo-2",
+    "text": "Code Documentation & Snippets",
+    "description": "Here is an example of a JavaScript code block:\n\n```javascript\nfunction greet(name) {\n  console.log(`Hello, ${name}!`);\n}\n```\n\nAnd some `inline code` for quick references.",
+    "labels": [
+      "Development",
+      "Docs"
+    ],
+    "completed": false,
+    "createdAt": "2026-04-10T22:07:05.000Z"
+  },
+  {
+    "id": "demo-4",
+    "text": "Formatting Style Guide",
+    "description": "You can use various text styles:\n- **Bold text** for emphasis\n- *Italic text* for subtle notes\n- ~~Strikethrough~~ for completed ideas\n- [Link to Google](https://www.google.com)",
+    "labels": [
+      "Guide",
+      "Personal"
+    ],
+    "completed": true,
+    "createdAt": "2026-04-10T22:07:15.000Z",
+    "completedAt": "2026-04-10T22:08:00.000Z"
+  },
+  {
+    "id": "demo-5",
+    "text": "Meeting Notes - Sprint Planning",
+    "description": "### Attendees\n- @ademali\n- @antigravity\n\n### Discussion Points\n1. Review last week's performance.\n2. Define goals for the next sprint.\n3. Assign tasks to team members.\n\n--- \n*Next meeting: Monday 10:00 AM*",
+    "labels": [
+      "Meeting",
+      "Work"
+    ],
+    "completed": false,
+    "createdAt": "2026-04-10T22:07:20.000Z"
+  }
+]

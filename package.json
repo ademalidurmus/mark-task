@@ -1,0 +1,17 @@
+{
+  "name": "marktask",
+  "version": "1.0.0",
+  "description": "A minimalist macOS-style Todo app with rich Markdown support.",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^41.2.0"
+  }
+}
