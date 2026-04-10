@@ -5,13 +5,56 @@
   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder",
+    "build": "electron-builder --mac",
+    "build:dir": "electron-builder --mac --dir",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Adem Ali Durmuş",
   "license": "ISC",
+  "build": {
+    "appId": "com.ademalidurmus.marktask",
+    "productName": "MarkTask",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "MarkTask",
+      "background": "assets/dmg-background.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 80,
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
   "devDependencies": {
-    "electron": "^41.2.0"
+    "electron": "^41.2.0",
+    "electron-builder": "^25.1.8"
   }
 }
+
