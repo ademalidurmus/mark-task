@@ -2,11 +2,23 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
-const DATA_FILE = path.join(__dirname, '..', '..', 'todos.json');
+let DATA_FILE = '';
 
-// Ensure data file exists
-if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+// app.getPath works after basic initialization
+try {
+    const userDataPath = app.getPath('userData');
+    DATA_FILE = path.join(userDataPath, 'todos.json');
+
+    if (!fs.existsSync(DATA_FILE)) {
+        const bundledTodos = path.join(__dirname, '..', '..', 'todos.json');
+        if (fs.existsSync(bundledTodos)) {
+            fs.copyFileSync(bundledTodos, DATA_FILE);
+        } else {
+            fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+        }
+    }
+} catch (error) {
+    console.error("Could not set DATA_FILE:", error);
 }
 
 function createWindow() {
@@ -17,6 +29,7 @@ function createWindow() {
         titleBarStyle: 'hiddenInset',
         icon: iconPath,
         webPreferences: {
+            // Note: renderer relies on this preload script
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false
@@ -27,7 +40,6 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    // Set dock icon for macOS
     if (process.platform === 'darwin') {
         app.dock.setIcon(path.join(__dirname, '..', '..', 'assets', 'icon.png'));
     }
@@ -45,11 +57,16 @@ app.on('window-all-closed', function () {
 
 // IPC Handlers for Data Persistence
 ipcMain.handle('get-todos', () => {
-    const rawData = fs.readFileSync(DATA_FILE);
-    return JSON.parse(rawData);
+    try {
+        const rawData = fs.readFileSync(DATA_FILE);
+        return JSON.parse(rawData);
+    } catch(err) {
+        return [];
+    }
 });
 
 ipcMain.handle('save-todos', (event, todos) => {
+    if(!DATA_FILE) return false;
     fs.writeFileSync(DATA_FILE, JSON.stringify(todos, null, 2));
     return true;
 });
